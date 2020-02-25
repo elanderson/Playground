@@ -25,7 +25,8 @@ jobs:
   - task: DotNetCoreCLI@2
     inputs:
       command: 'publish'
-      publishWebProjects: true
+      publishWebProjects: false
+      projects: '**/WebApp1.csproj'
       arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
   - task: PublishPipelineArtifact@1
