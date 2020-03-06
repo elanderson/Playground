@@ -13,7 +13,7 @@ jobs:
   - checkout: self
   - checkout: git://Playground/Shared
   
-  - template: Shared/buildCoreWebProject.yml
+  - template: buildCoreWebProject.yml@Shared
     parameters:
       buildConFiguration: $(buildConfiguration)
       project: WebApp1.csproj
