@@ -13,11 +13,11 @@ jobs:
   - checkout: self
   - checkout: git://Playground/Shared
   
-  # - template: buildCoreWebProject.yml
-  #   parameters:
-  #     buildConFiguration: $(buildConfiguration)
-  #     project: WebApp1.csproj
-  #     artifactName: WebApp1
+  - template: buildCoreWebProject.yml
+    parameters:
+      buildConFiguration: $(buildConfiguration)
+      project: WebApp1.csproj
+      artifactName: WebApp1
 
 - job: WebApp2
   displayName: 'Build WebApp2'
