@@ -10,7 +10,10 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   steps:
-  - template: build.yml
+  - checkout: self
+  - checkout: git://Playground/Shared
+  
+  - template: Shared/buildCoreWebProject.yml
     parameters:
       buildConFiguration: $(buildConfiguration)
       project: WebApp1.csproj
@@ -22,6 +25,9 @@ jobs:
     vmImage: 'ubuntu-latest'
 
   steps:
+  - checkout: self
+  - checkout: git://Playground/Shared
+
   - template: build.yml
     parameters:
       buildConFiguration: $(buildConfiguration)
