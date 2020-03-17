@@ -50,4 +50,4 @@ jobs:
     parameters:
       buildConFiguration: $(buildConfiguration)
       project: WebApp1.csproj
-      artifactName: WebApp1
+      artifactName: WebApp1Again
