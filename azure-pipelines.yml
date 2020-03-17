@@ -25,7 +25,7 @@ jobs:
 
 - job: WebApp2
   displayName: 'Build WebApp2'
-  condition: and(succeeded(), eq(variables['WebApp2'], 'true'))
+  condition: and(succeeded(), eq(variables['BuildWebApp2'], 'true'))
   pool:
     vmImage: 'ubuntu-latest'
 
