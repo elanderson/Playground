@@ -37,7 +37,7 @@ jobs:
       artifactName: WebApp2
       
 - job: DependentJob
-  displayName: 'Build DependentJob'
+  displayName: 'Build Dependent Job'
   pool:
     vmImage: 'ubuntu-latest'
 
