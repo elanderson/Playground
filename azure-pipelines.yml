@@ -34,3 +34,19 @@ jobs:
       buildConFiguration: $(buildConfiguration)
       project: WebApp2.csproj
       artifactName: WebApp2
+      
+- job: DependentJob
+  displayName: 'Build DependentJob'
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  dependsOn:
+  - WebApp1
+  - WebApp2
+
+  steps:
+  - template: buildCoreWebProject.yml@Shared
+    parameters:
+      buildConFiguration: $(buildConfiguration)
+      project: WebApp1.csproj
+      artifactName: WebApp1
