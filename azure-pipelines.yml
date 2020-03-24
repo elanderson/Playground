@@ -1,3 +1,5 @@
+name: $(SourceBranchName)_$(date:yyyyMMdd)$(rev:.r)
+
 resources:      
   repositories: 
   - repository: Shared
