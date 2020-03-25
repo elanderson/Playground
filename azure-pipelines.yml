@@ -53,3 +53,33 @@ jobs:
       buildConFiguration: $(buildConfiguration)
       project: WebApp1.csproj
       artifactName: WebApp1Again
+
+- job: TagSources
+  displayName: 'Tag Sources'
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  dependsOn:
+  - WebApp1
+  - WebApp2
+  - DependentJob
+ 
+  steps:
+  - checkout: self
+    persistCredentials: true
+    clean: true
+    fetchDepth: 1
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        $env:GIT_REDIRECT_STDERR` = '2>&1'
+        $tag = "manual_$(Build.BuildNumber)".replace(' ', '_')
+        git tag $tag
+        Write-Host "Successfully created tag $tag" 
+
+        git push --tags
+         Write-Host "Successfully pushed tag $tag"     
+
+      failOnStderr: true
