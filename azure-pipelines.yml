@@ -63,6 +63,13 @@ jobs:
   - WebApp1
   - WebApp2
   - DependentJob
+  condition: |
+    and
+    (
+      eq(dependencies.WebApp1.result, 'Succeeded'),
+      in(dependencies.WebApp2.result, 'Succeeded', 'Skipped'),
+      in(dependencies.DependentJob.result, 'Succeeded', 'Skipped')
+    )
  
   steps:
   - checkout: self
