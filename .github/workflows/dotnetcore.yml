@@ -7,8 +7,9 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build_web_app1:
 
+    name: Build WebApp1
     runs-on: ubuntu-latest
 
     steps:
@@ -20,25 +21,50 @@ jobs:
         dotnet-version: 3.1.101
  
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore ${{ github.workspace }}/src/WebApp1/WebApp1.csproj
       
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ${{ github.workspace }}/src/WebApp1/WebApp1.csproj --configuration Release --no-restore
       
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test ${{ github.workspace }}/src/WebApp1/WebApp1.csproj --no-restore --verbosity normal
 
     - name: Publish
-      run: dotnet publish 
+      run: dotnet publish ${{ github.workspace }}/src/WebApp1/WebApp1.csproj
     
-    - name: Upload WebApp1 Build Artifact
+    - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
       with:
         name: WebApp1
-        path: /home/runner/work/Playground/Playground/src/WebApp1/bin/Debug/netcoreapp3.1/publish/
+        path: ${{ github.workspace }}/src/WebApp1/bin/Debug/netcoreapp3.1/publish/
         
-    - name: Upload WebApp2 Build Artifact
+  build_web_app2:
+
+    name: Build WebApp2
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+ 
+    - name: Install dependencies
+      run: dotnet restore ${{ github.workspace }}/src/WebApp1/WebApp2.csproj
+      
+    - name: Build
+      run: dotnet build ${{ github.workspace }}/src/WebApp1/WebApp2.csproj --configuration Release --no-restore
+      
+    - name: Test
+      run: dotnet test ${{ github.workspace }}/src/WebApp1/WebApp2.csproj --no-restore --verbosity normal
+
+    - name: Publish
+      run: dotnet publish ${{ github.workspace }}/src/WebApp1/WebApp2.csproj
+       
+    - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
       with:
         name: WebApp2
-        path: /home/runner/work/Playground/Playground/src/WebApp2/bin/Debug/netcoreapp3.1/publish/
+        path: ${{ github.workspace }}/src/WebApp2/bin/Debug/netcoreapp3.1/publish/
